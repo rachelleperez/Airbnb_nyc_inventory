@@ -125,4 +125,46 @@ SELECT * FROM neighbourhood_totals INNER JOIN neighbourhood_totals_by_room USING
 -- test - supply & demand
 --- 
 
+** QUERY ***
+
+-- Top Neighborhoods
+SELECT neighbourhood_group, neighbourhood, COUNT(id) as listing_count FROM airbnb_nyc GROUP BY 1, 2 ORDER BY 3 DESC;
+
+-- Top Brooklyn Neighborhood
+
+SELECT neighbourhood_group, neighbourhood, COUNT(id) as listing_count FROM airbnb_nyc WHERE neighbourhood_group = 'Brooklyn' AND availability_365 <> 0 GROUP BY 1, 2 ORDER BY 3 DESC;
+
+ANSWER: WILLIAMSBURG!
+
+--- Top Queens Neighborhood
+
+SELECT neighbourhood_group, neighbourhood, COUNT(id) as listing_count FROM airbnb_nyc WHERE neighbourhood_group = 'Queens' AND availability_365 <> 0 AND availability_365 <> 0 GROUP BY 1, 2 ORDER BY 3 DESC;
+
+ANSWER: ASTORIA
+
+--- Top Staten Island
+
+SELECT neighbourhood_group, neighbourhood, COUNT(id) as listing_count FROM airbnb_nyc WHERE neighbourhood_group = 'Staten Island' AND availability_365 <> 0GROUP BY 1, 2 ORDER BY 3 DESC;
+
+ANSWER: St. George
+
+--- Top Bronx
+
+SELECT neighbourhood_group, neighbourhood, COUNT(id) as listing_count FROM airbnb_nyc WHERE neighbourhood_group = 'Bronx' AND availability_365 <> 0 GROUP BY 1, 2 ORDER BY 3 DESC;
+
+ANSWER: Kingsbridge
+
+--- Distribution by Borough
+
+SELECT neighbourhood_group, COUNT(id) as listing_count FROM airbnb_nyc WHERE availability_365 <> 0GROUP BY neighbourhood_group ORDER BY 2 DESC;
+
+-- Room Type Distribution
+
+SELECT room_type, COUNT(id) as listing_count FROM airbnb_nyc WHERE availability_365 <> 0 GROUP BY room_type ORDER BY 2 DESC;
+
+--- Price Per Room Type
+
+SELECT room_type, ROUND(AVG(price),2) as listing_count FROM airbnb_nyc WHERE availability_365 <> 0 GROUP BY room_type ORDER BY 2 DESC;
+
+
 
